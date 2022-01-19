@@ -31,4 +31,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     //JPQL에서는 Page 단위로 리턴할 때 countQuery가 필수
     @Query(value = "select b,w,count(r) from Board b LEFT JOIN b.writer w left join Reply r ON r.board = b GROUP BY b",countQuery = "select count(b) from Board b")
     Page<Object []> getBoardWithReplyCount(Pageable pageable);
+
+    //게시글 상세보기를 위한 메서드
+    @Query("select b,w, count(r) from Board b left join b.writer w left  outer join Reply r on r.board = b where b.bno = :bno")
+
+    Object getBoardByBno(@Param("bno") Long bno);
 }
