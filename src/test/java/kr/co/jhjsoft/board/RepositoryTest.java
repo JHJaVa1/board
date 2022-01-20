@@ -97,10 +97,25 @@ public class RepositoryTest {
 
     }
 
-    @Test
+    //@Test
     public  void testBoard(){
         Object result = boardRepository.getBoardByBno(46L);
         Object [] ar = (Object[])  result;
         System.out.println(Arrays.toString(ar));
+    }
+    //@Test
+    public void testQuerydsl(){
+
+        //boardRepository.search();
+
+        Pageable pageable = PageRequest.of(0,10, Sort.by("bno").descending().and(Sort.by("title").ascending()));
+        Page<Object[]> result = boardRepository.searchPage("t","1",pageable);
+        System.out.println(result);
+
+    }
+    @Test
+    public void testReplyList(){
+        List<Reply> list = replyRepository.getRepliesByBoardOrderByRno(Board.builder().bno(99L).build());
+        System.out.println(list);
     }
 }

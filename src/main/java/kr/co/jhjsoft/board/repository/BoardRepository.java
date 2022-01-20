@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Long>, SearchBoardRepository {
     //Member와 Board Entity의 JOIN을 수행하는 메서드를 생성
     //Board Entity에는 Member Entity와 연관 관계를 갖는 writer가 존재
 
